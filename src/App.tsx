@@ -1,7 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
+import Button from './components/button';
 import FormData from './components/Form';
+import Input from './components/input';
 import UseEffect from './components/UseEffect';
 import UseRef from './components/UseRef';
 import UseState from './components/UseState';
@@ -15,7 +17,14 @@ const App: React.FC<IAppOwnProps> = ({username,userType}): JSX.Element => {
   
   const [time,setTime] = useState<Date>(() => new Date(Date.now()))
   const [message, setMessage] = useState<string>();
-
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  } 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("click");
+    
+  }
+    
   setInterval(() => {
     setTime(new Date(Date.now()));
   }, 1000);
@@ -42,7 +51,9 @@ const App: React.FC<IAppOwnProps> = ({username,userType}): JSX.Element => {
       <p>
         Your message: {message || ''}
       </p>
-     
+      <Input type="text" onChange={handleChange}/>
+      <Button type="submit" value="Submit" onClick={handleClick} className="bg-primary"/>
+
      <UseState />
 
      <UseEffect />
